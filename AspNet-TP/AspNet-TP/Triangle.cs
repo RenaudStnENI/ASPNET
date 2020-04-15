@@ -18,9 +18,9 @@ namespace AspNet_TP
             return Math.Sqrt(p * (p - A) * (p - B) * (p - C));
         }
 
-        public double Perimetre()
+        private int Perimetre()
         {
-            return this.A + this.B + this.C;
+            throw new NotImplementedException();
         }
 
         public override string ToString()
@@ -28,6 +28,11 @@ namespace AspNet_TP
             return $"Triangle de côté A={A}, B={B}, C={C}" + Environment.NewLine +
                 $"Aire = {Aire()}" + Environment.NewLine +
                 $"Périmètre = {Perimetre()}" + Environment.NewLine;
+        }
+
+        double Forme.Perimetre()
+        {
+            throw new NotImplementedException();
         }
     }
 }
