@@ -91,7 +91,7 @@ namespace AspNet_TP
 
             ///
             Console.WriteLine("///les titres de tous les livres triés par ordre alphabétique");
-            var livresAlpha = ListeLivres.Select(l => l.Titre).OrderBy(t => t);
+            var livresAlpha = ListeLivres.Select(l => l.Titre).OrderBy(t => t).ToList();
             foreach(var livre in livresAlpha)
             {
                 Console.WriteLine($"{livre}");
