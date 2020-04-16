@@ -1,11 +1,11 @@
-﻿using AspNet_TP.BO;
+﻿using AspNet_TP01_Module03.BO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AspNet_TP
+namespace AspNet_TP01_Module03
 {
     class Program
     {

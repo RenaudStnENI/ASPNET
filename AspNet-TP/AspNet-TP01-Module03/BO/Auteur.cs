@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AspNet_TP.BO
+namespace AspNet_TP01_Module03.BO
 {
     public class Auteur
     {

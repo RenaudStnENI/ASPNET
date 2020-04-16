@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AspNet_TP
+namespace AspNet_TP01_Module02
 {
     class Program
     {
