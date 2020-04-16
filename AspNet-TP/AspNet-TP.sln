@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30002.166
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNet-TP01-Module02", "AspNet-TP\AspNet-TP01-Module02.csproj", "{6CB38AF5-A834-4EC7-A5C5-B759D318546E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNet-TP01-Module02", "AspNet-TP01-Module02\AspNet-TP01-Module02.csproj", "{6CB38AF5-A834-4EC7-A5C5-B759D318546E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNet_TP01_Module03", "AspNet-TP01-Module03\AspNet_TP01_Module03.csproj", "{621BF9A2-EB9B-4524-BBFC-3BEF890AD2A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "exemple", "exemple\exemple.csproj", "{2EF58A88-4DEF-4831-961A-6979C5852C71}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{621BF9A2-EB9B-4524-BBFC-3BEF890AD2A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{621BF9A2-EB9B-4524-BBFC-3BEF890AD2A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{621BF9A2-EB9B-4524-BBFC-3BEF890AD2A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2EF58A88-4DEF-4831-961A-6979C5852C71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EF58A88-4DEF-4831-961A-6979C5852C71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EF58A88-4DEF-4831-961A-6979C5852C71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EF58A88-4DEF-4831-961A-6979C5852C71}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
