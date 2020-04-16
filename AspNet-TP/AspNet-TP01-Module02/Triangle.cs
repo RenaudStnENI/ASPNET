@@ -14,13 +14,13 @@ namespace AspNet_TP01_Module02
 
         public double Aire()
         {
-            double p = Perimetre() / 2;
+            double p = Perimetre() / 2.0;
             return Math.Sqrt(p * (p - A) * (p - B) * (p - C));
         }
 
-        private int Perimetre()
+        public double Perimetre()
         {
-            throw new NotImplementedException();
+            return A + B + C;
         }
 
         public override string ToString()
@@ -28,11 +28,6 @@ namespace AspNet_TP01_Module02
             return $"Triangle de côté A={A}, B={B}, C={C}" + Environment.NewLine +
                 $"Aire = {Aire()}" + Environment.NewLine +
                 $"Périmètre = {Perimetre()}" + Environment.NewLine;
-        }
-
-        double Forme.Perimetre()
-        {
-            throw new NotImplementedException();
         }
     }
 }
