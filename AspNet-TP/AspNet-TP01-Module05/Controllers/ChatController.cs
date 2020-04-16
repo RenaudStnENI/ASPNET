@@ -19,7 +19,7 @@ namespace AspNet_TP01_Module05.Controllers
         // GET: Chat/Details/5
         public ActionResult Details(int id)
         {
-            Chat chat = FakeDBCat.Instance.ListeChats.First(c => c.Id == id);
+            Chat chat = FakeDBCat.Instance.ListeChats.FirstOrDefault(c => c.Id == id);
 
             return chat != null ? View(chat) : (ActionResult) RedirectToAction("Index");
         }
@@ -39,7 +39,7 @@ namespace AspNet_TP01_Module05.Controllers
         {
             try
             {
-                Chat chat = FakeDBCat.Instance.ListeChats.First(c => c.Id == id);
+                Chat chat = FakeDBCat.Instance.ListeChats.FirstOrDefault(c => c.Id == id);
 
                 if (chat != null)
                 {
