@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using TP.Models;
+using AspNet_TP01_Module05.Models;
 
-namespace TP.Database
+namespace AspNet_TP01_Module05.Database
 {
     public class FakeDBCat
     {

@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "exemple", "exemple\exemple.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNet-TP01-Module05", "AspNet-TP01-Module05\AspNet-TP01-Module05.csproj", "{9DEAE8B4-D325-4C1D-BD1B-D521BDB0C57F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNet-TP02-Module05", "AspNet-TP02-Module05\AspNet-TP02-Module05.csproj", "{0C3F7EBE-48A6-43C2-9AAB-49FE66B23E72}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNet-TP-Module05-BO", "AspNet-TP-Module05-BO\AspNet-TP-Module05-BO.csproj", "{6066EAAA-6025-49BC-A1F3-FC6447C42CD9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{9DEAE8B4-D325-4C1D-BD1B-D521BDB0C57F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9DEAE8B4-D325-4C1D-BD1B-D521BDB0C57F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9DEAE8B4-D325-4C1D-BD1B-D521BDB0C57F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C3F7EBE-48A6-43C2-9AAB-49FE66B23E72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C3F7EBE-48A6-43C2-9AAB-49FE66B23E72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C3F7EBE-48A6-43C2-9AAB-49FE66B23E72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C3F7EBE-48A6-43C2-9AAB-49FE66B23E72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6066EAAA-6025-49BC-A1F3-FC6447C42CD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6066EAAA-6025-49BC-A1F3-FC6447C42CD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6066EAAA-6025-49BC-A1F3-FC6447C42CD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6066EAAA-6025-49BC-A1F3-FC6447C42CD9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

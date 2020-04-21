@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using AspNet_TP01_Module05.Models;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using TP.Database;
-using TP.Models;
+using AspNet_TP01_Module05.Database;
 
 namespace AspNet_TP01_Module05.Controllers
 {

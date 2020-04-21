@@ -1,0 +1,61 @@
+﻿@using AspNet_TP02_Module05
+@model IEnumerable<AspNet_TP_Module05_BO.Pizza>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ingredients)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pate)
+        </th>
+        <th></th>
+    </tr>
+
+    @{
+        if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nom)
+                    </td>
+                    <td>
+                        <ul>
+                            @foreach (var ing in item.Ingredients)
+                            {
+                                <li>@Html.DisplayFor(modelItem => ing.Nom)</li>
+                            }
+
+                        </ul>
+                    </td>
+                    <td>
+                        @if (item.Pate != null)
+                        {
+                            @Html.DisplayFor(modelItem => item.Pate.Nom)
+                        }
+                    </td>
+                    <td>
+                        @Html.ActionLink("Details", "Details", new {id = item.Id}) |
+                        @Html.ActionLink("Delete", "Delete", new {id = item.Id})
+                        @Html.ActionLink("Edit", "Edit", new {id = item.Id})
+                    </td>
+                </tr>
+            }
+        }
+    }
+
+</table>
