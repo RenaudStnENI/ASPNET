@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using AspNet_TP_Module05_BO;
@@ -12,15 +14,27 @@ namespace AspNet_TP02_Module05.Utils
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
             PizzaCreateEditVM vm = (PizzaCreateEditVM) validationContext.ObjectInstance;
+            bool isDifferent = true;
 
-            List<Pizza> pizzas = FakeDBPizza.Instance.ListePizzas;
-            List<List<Ingredient>> recettes = pizzas.Select(p => p.Ingredients).ToList();
-            List<List<int>> liste = recettes.Select(r => r.Select(i => i.Id).ToList()).ToList();
+            foreach (var pizza in FakeDBPizza.Instance.ListePizzas)
+            {
+                if (vm.IdIngredients.Count == pizza.Ingredients.Count)
+                {
+                    isDifferent = false;
+                    List<Ingredient> pizzaDb = pizza.Ingredients.OrderBy(x => x.Id).ToList();
+                    vm.IdIngredients = vm.IdIngredients.OrderBy(x => x).ToList();
+                    for (int i = 0; i < vm.IdIngredients.Count; i++)
+                    {
+                        if (vm.IdIngredients.ElementAt(i) != pizzaDb.ElementAt(i).Id)
+                        {
+                            isDifferent = true;
+                            break;
+                        }
+                    }
+                }
+            }
 
-            List<int> vmIng = new List<int>();
-            vmIng = vm.IdIngredients;
-
-            return liste.Any(l=>l== vmIng) ? new ValidationResult("oops") : ValidationResult.Success;
+            return !isDifferent ? new ValidationResult("oops") : ValidationResult.Success;
         }
     }
 }
