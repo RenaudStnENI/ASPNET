@@ -81,13 +81,14 @@ namespace TP01_Module06.Controllers
             SamouraisVM vm = new SamouraisVM();
             vm.Samourai = db.Samourais.Find(id);
             this.getArmes(vm);
-            if (vm.Samourai == null || vm.Armes == null)
+            if (vm.Samourai.Arme != null)
             {
-                return HttpNotFound();
+                vm.IdArme = vm.Samourai.Arme.Id;
             }
             else
             {
-                vm.IdArme = vm.Samourai.Arme.Id;
+                vm.IdArme = null;
+
             }
 
             return View(vm);
