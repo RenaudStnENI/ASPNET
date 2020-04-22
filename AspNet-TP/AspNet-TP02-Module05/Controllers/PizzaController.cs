@@ -78,7 +78,7 @@ namespace AspNet_TP02_Module05.Controllers
                     return View(this.getPatesIngredients());
                 }
             }
-            catch (Exception e)
+            catch
             {
                 return View(this.getPatesIngredients());
             }

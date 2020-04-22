@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNet-TP02-Module05", "Asp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNet-TP-Module05-BO", "AspNet-TP-Module05-BO\AspNet-TP-Module05-BO.csproj", "{6066EAAA-6025-49BC-A1F3-FC6447C42CD9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TP01_Module06", "TP01_Module06\TP01_Module06.csproj", "{A8D93A9B-2F19-44F3-8739-6CCC3C81EBE6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BO-Samourai", "BO-Samourai\BO-Samourai.csproj", "{954BFCCD-9C0D-4FE1-9E45-ED6AA23231E2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +49,14 @@ Global
 		{6066EAAA-6025-49BC-A1F3-FC6447C42CD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6066EAAA-6025-49BC-A1F3-FC6447C42CD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6066EAAA-6025-49BC-A1F3-FC6447C42CD9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8D93A9B-2F19-44F3-8739-6CCC3C81EBE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8D93A9B-2F19-44F3-8739-6CCC3C81EBE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8D93A9B-2F19-44F3-8739-6CCC3C81EBE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8D93A9B-2F19-44F3-8739-6CCC3C81EBE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{954BFCCD-9C0D-4FE1-9E45-ED6AA23231E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{954BFCCD-9C0D-4FE1-9E45-ED6AA23231E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{954BFCCD-9C0D-4FE1-9E45-ED6AA23231E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{954BFCCD-9C0D-4FE1-9E45-ED6AA23231E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
