@@ -39,7 +39,8 @@ namespace AspNet_TP02_Module05.Controllers
         // GET: Pizza/Create
         public ActionResult Create()
         {
-            return View(this.getPatesIngredients());
+            PizzaCreateEditVM vm = new PizzaCreateEditVM();
+            return View(this.getPatesIngredients(vm));
         }
 
         // POST: Pizza/Create
@@ -52,14 +53,9 @@ namespace AspNet_TP02_Module05.Controllers
                 {
                     Pizza pizza = vm.Pizza;
 
-                    if (FakeDBPizza.Instance.ListePizzas.Count() == 0)
-                    {
-                        pizza.Id = 1;
-                    }
-                    else
-                    {
-                        pizza.Id = FakeDBPizza.Instance.ListePizzas.Max(p => p.Id) + 1;
-                    }
+                    pizza.Id = FakeDBPizza.Instance.ListePizzas.Count() == 0
+                        ? 1
+                        : FakeDBPizza.Instance.ListePizzas.Max(p => p.Id) + 1;
 
                     pizza.Pate = FakeDBPizza.Instance.ListePates.FirstOrDefault(p => p.Id == vm.IdPate);
 
@@ -75,12 +71,12 @@ namespace AspNet_TP02_Module05.Controllers
                 }
                 else
                 {
-                    return View(this.getPatesIngredients());
+                    return View(this.getPatesIngredients(vm));
                 }
             }
             catch
             {
-                return View(this.getPatesIngredients());
+                return View(this.getPatesIngredients(vm));
             }
         }
 
@@ -97,6 +93,9 @@ namespace AspNet_TP02_Module05.Controllers
             if (pizza != null)
             {
                 vm.Pizza = pizza;
+                vm.IdIngredients = vm.Pizza.Ingredients.Select(i => i.Id).ToList();
+                vm.IdPate = vm.Pizza.Pate.Id;
+                getPatesIngredients(vm);
                 return View(vm);
             }
             else
@@ -112,13 +111,35 @@ namespace AspNet_TP02_Module05.Controllers
             {
                 try
                 {
-                    FakeDBPizza.Instance.ListePizzas[id].Nom = vm.Pizza.Nom;
-                    FakeDBPizza.Instance.ListePizzas[id].Pate = vm.Pizza.Pate;
-                    return RedirectToAction("Index");
+
+                    if (ModelState.IsValid)
+                    {
+                        Pizza modifiedPizza = FakeDBPizza.Instance.ListePizzas.FirstOrDefault(p => p.Id == vm.Pizza.Id);
+
+                        // nom
+                        modifiedPizza.Nom = vm.Pizza.Nom;
+
+                        //pate
+                        Pate pate = FakeDBPizza.Instance.ListePates.FirstOrDefault(p => p.Id == vm.IdPate);
+                        modifiedPizza.Pate = pate;
+
+                        //ingrédients
+                        modifiedPizza.Ingredients = FakeDBPizza.Instance.ListeIngredients
+                            .Where(i => vm.IdIngredients.Contains(i.Id)).ToList();
+
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        getPatesIngredients(vm);
+                        return View(vm);
+                    }
+                   
                 }
                 catch
                 {
-                    return View();
+                    getPatesIngredients(vm);
+                    return View(vm);
                 }
             }
         }
@@ -126,7 +147,9 @@ namespace AspNet_TP02_Module05.Controllers
         // GET: Pizza/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            PizzaCreateEditVM vm = new PizzaCreateEditVM();
+            vm.Pizza = FakeDBPizza.Instance.ListePizzas.FirstOrDefault(p => p.Id == id);
+            return View(vm);
         }
 
         // POST: Pizza/Delete/5
@@ -135,7 +158,7 @@ namespace AspNet_TP02_Module05.Controllers
         {
             try
             {
-                // TODO: Add delete logic here
+                FakeDBPizza.Instance.ListePizzas.Remove(FakeDBPizza.Instance.ListePizzas.FirstOrDefault(p => p.Id == id));
 
                 return RedirectToAction("Index");
             }
@@ -145,9 +168,8 @@ namespace AspNet_TP02_Module05.Controllers
             }
         }
 
-        private PizzaCreateEditVM getPatesIngredients()
+        private PizzaCreateEditVM getPatesIngredients(PizzaCreateEditVM vm)
         {
-            PizzaCreateEditVM vm = new PizzaCreateEditVM();
             vm.Pate = FakeDBPizza.Instance.ListePates.Select(p => new SelectListItem()
                     {Text = p.Nom, Value = p.Id.ToString()})
                 .ToList();

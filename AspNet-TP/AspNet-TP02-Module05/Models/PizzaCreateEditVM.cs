@@ -8,7 +8,9 @@ namespace AspNet_TP02_Module05.Models
 {
     public class PizzaCreateEditVM
     {
-        [PizzaNameValidator] public Pizza Pizza { get; set; }
+        [PizzaNameValidator] 
+        [Required]
+        public Pizza Pizza { get; set; }
         public List<SelectListItem> Pate { get; set; } = new List<SelectListItem>();
         public List<SelectListItem> Ingredients { get; set; } = new List<SelectListItem>();
 

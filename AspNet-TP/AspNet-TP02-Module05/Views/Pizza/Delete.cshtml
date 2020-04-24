@@ -1,4 +1,4 @@
-﻿@model AspNet_TP_Module05_BO.Pizza
+﻿@model AspNet_TP02_Module05.Models.PizzaCreateEditVM
 
 @{
     ViewBag.Title = "Delete";
@@ -10,18 +10,14 @@
 <div>
     <h4>Pizza</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Nom)
-        </dt>
+    <div class="form-horizontal">
 
-        <dd>
-            @Html.DisplayFor(model => model.Nom)
-        </dd>
+        @Html.Partial("_PizzaPartial")
 
-    </dl>
+    </div>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">

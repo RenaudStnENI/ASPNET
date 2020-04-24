@@ -13,14 +13,15 @@ namespace AspNet_TP02_Module05.Utils
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            PizzaCreateEditVM vm = (PizzaCreateEditVM) validationContext.ObjectInstance;
-            bool isDifferent = true;
+            PizzaCreateEditVM vm = (PizzaCreateEditVM)validationContext.ObjectInstance;
+
+            bool result = true;
 
             foreach (var pizza in FakeDBPizza.Instance.ListePizzas)
             {
                 if (vm.IdIngredients.Count == pizza.Ingredients.Count)
                 {
-                    isDifferent = false;
+                    bool isDifferent = false;
                     List<Ingredient> pizzaDb = pizza.Ingredients.OrderBy(x => x.Id).ToList();
                     vm.IdIngredients = vm.IdIngredients.OrderBy(x => x).ToList();
                     for (int i = 0; i < vm.IdIngredients.Count; i++)
@@ -31,10 +32,17 @@ namespace AspNet_TP02_Module05.Utils
                             break;
                         }
                     }
+
+                    if (!isDifferent)
+                    {
+                        result = false;
+                    }
                 }
             }
-
-            return !isDifferent ? new ValidationResult("oops") : ValidationResult.Success;
+            
+            return result
+                ? ValidationResult.Success
+                : new ValidationResult("Ces ingrédients sont dans une autre pizza");
         }
     }
 }

@@ -127,6 +127,7 @@ namespace TP01_Module06.Controllers
         {
             if (ModelState.IsValid)
             {
+                //
                 Samourai modifiedSam = db.Samourais.Include(x => x.Arme).FirstOrDefault(x => x.Id == vm.Samourai.Id);
                 //
                 modifiedSam.Nom = vm.Samourai.Nom;
@@ -140,7 +141,6 @@ namespace TP01_Module06.Controllers
 
                 modifiedSam.ArtMartials = db.ArtMartials.Where(am => vm.IdsArtMartial.Contains(am.Id)).ToList();
                 //
-
                 if (vm.IdArme != null)
                 {
                     modifiedSam.Arme = db.Armes.FirstOrDefault(a => a.Id == vm.IdArme);
