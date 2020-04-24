@@ -23,7 +23,7 @@ else
         @if (Model.Pate != null && Model.Pate.Count > 0)
         {
             @Html.EditorFor(model => model.Pizza.Nom, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Pizza.Nom, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model => model.Pizza, "", new { @class = "text-danger" })
         }
         else
         {

@@ -26,16 +26,20 @@ namespace AspNet_TP02_Module05.Utils
                     vm.IdIngredients = vm.IdIngredients.OrderBy(x => x).ToList();
                     for (int i = 0; i < vm.IdIngredients.Count; i++)
                     {
-                        if (vm.IdIngredients.ElementAt(i) != pizzaDb.ElementAt(i).Id || vm.Pizza.Id != 0)
+                        if (vm.IdIngredients.ElementAt(i) != pizzaDb.ElementAt(i).Id)
                         {
+
                             isDifferent = true;
                             break;
                         }
                     }
 
-                    if (isDifferent==false)
+                    if (!isDifferent)
                     {
-                        result = false;
+                        if (vm.Pizza.Id!=pizza.Id)
+                        {
+                            result = false;
+                        }
                     }
                 }
             }
