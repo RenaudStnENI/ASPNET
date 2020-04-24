@@ -13,7 +13,7 @@ namespace AspNet_TP02_Module05.Utils
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            PizzaCreateEditVM vm = (PizzaCreateEditVM)validationContext.ObjectInstance;
+            PizzaCreateEditVM vm = (PizzaCreateEditVM) validationContext.ObjectInstance;
 
             bool result = true;
 
@@ -26,20 +26,20 @@ namespace AspNet_TP02_Module05.Utils
                     vm.IdIngredients = vm.IdIngredients.OrderBy(x => x).ToList();
                     for (int i = 0; i < vm.IdIngredients.Count; i++)
                     {
-                        if (vm.IdIngredients.ElementAt(i) != pizzaDb.ElementAt(i).Id)
+                        if (vm.IdIngredients.ElementAt(i) != pizzaDb.ElementAt(i).Id || vm.Pizza.Id != 0)
                         {
                             isDifferent = true;
                             break;
                         }
                     }
 
-                    if (!isDifferent)
+                    if (isDifferent==false)
                     {
                         result = false;
                     }
                 }
             }
-            
+
             return result
                 ? ValidationResult.Success
                 : new ValidationResult("Ces ingrédients sont dans une autre pizza");
