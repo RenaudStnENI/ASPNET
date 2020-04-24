@@ -7,10 +7,19 @@
 <h2>Details</h2>
 
 <div class="form-horizontal">
+
     @Html.Partial("_SamouraiPartialWithId")
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Samourai.Potentiel, htmlAttributes: new { @class = "control-label col-md-2" , @style = "padding-top:0"})
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.Samourai.Potentiel)
+        </div>
+    </div>
+
 </div>
 
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Samourai.Id }) |
+    @Html.ActionLink("Edit", "Edit", new {id = Model.Samourai.Id}) |
     @Html.ActionLink("Back to List", "Index")
 </p>

@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using BO_Samourai;
 using TP01_Module06.Data;
@@ -30,8 +27,10 @@ namespace TP01_Module06.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
+
             SamouraisVM vm = new SamouraisVM();
             vm.Samourai = db.Samourais.Find(id);
+
             if (vm.Samourai == null)
             {
                 return HttpNotFound();
@@ -44,7 +43,8 @@ namespace TP01_Module06.Controllers
         public ActionResult Create()
         {
             SamouraisVM vm = new SamouraisVM();
-            this.getArmes(vm);
+
+            this.getArmesAndArtMartials(vm);
 
             return View(vm);
         }
@@ -58,16 +58,28 @@ namespace TP01_Module06.Controllers
         {
             if (ModelState.IsValid)
             {
-                Samourai sam = vm.Samourai;
-                sam.Arme = db.Armes.FirstOrDefault(x => x.Id == vm.IdArme);
+                if (vm.IdArme != null)
+                {
+                    Samourai samAvecArme = db.Samourais.FirstOrDefault(s => s.Arme.Id == vm.IdArme);
+                    if (samAvecArme != null)
+                    {
+                        samAvecArme.Arme = null;
+                        db.Entry(samAvecArme).State = EntityState.Modified;
+                    }
+
+                    vm.Samourai.Arme = db.Armes.Find(vm.IdArme);
+                }
+
+                vm.Samourai.ArtMartials = db.ArtMartials.Where(am => vm.IdsArtMartial.Contains(am.Id)).ToList();
+
                 db.Samourais.Add(vm.Samourai);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            else
-            {
-                return View(this.getArmes(vm));
-            }
+
+            this.getArmesAndArtMartials(vm);
+
+            return View(vm);
         }
 
         // GET: Samourais/Edit/5
@@ -80,15 +92,27 @@ namespace TP01_Module06.Controllers
 
             SamouraisVM vm = new SamouraisVM();
             vm.Samourai = db.Samourais.Find(id);
-            this.getArmes(vm);
+            if (vm.Samourai == null)
+            {
+                return HttpNotFound();
+            }
+
+            //
+            List<int> listeArmesId =
+                db.Samourais.Where(x => x.Arme != null && x.Id != id).Select(x => x.Arme.Id).ToList();
+            vm.ArmeItems = db.Armes.Where(a => !listeArmesId.Contains(a.Id)).Select(a => new SelectListItem()
+                    {Text = a.Nom, Value = a.Id.ToString()})
+                .ToList();
+            //
+            vm.ArtMartialItems = db.ArtMartials.Select(am => new SelectListItem()
+                    {Text = am.Nom, Value = am.Id.ToString()})
+                .ToList();
+            //
+            vm.IdsArtMartial = vm.Samourai.ArtMartials.Select(s => s.Id).ToList();
+            //
             if (vm.Samourai.Arme != null)
             {
                 vm.IdArme = vm.Samourai.Arme.Id;
-            }
-            else
-            {
-                vm.IdArme = null;
-
             }
 
             return View(vm);
@@ -103,16 +127,45 @@ namespace TP01_Module06.Controllers
         {
             if (ModelState.IsValid)
             {
-                Samourai modifiedSam = db.Samourais.Include(s => s.Arme).FirstOrDefault(x => x.Id == vm.Samourai.Id);
-
-                modifiedSam.Arme = vm.IdArme == null ? null : db.Armes.FirstOrDefault(x => x.Id == vm.IdArme);
+                Samourai modifiedSam = db.Samourais.Find(vm.Samourai.Id);
+                //
+                modifiedSam.Nom = vm.Samourai.Nom;
+                //
+                modifiedSam.Force = vm.Samourai.Force;
+                //
+                foreach (var am in modifiedSam.ArtMartials)
+                {
+                    db.Entry(am).State = EntityState.Modified;
+                }
+                modifiedSam.ArtMartials = db.ArtMartials.Where(am => vm.IdsArtMartial.Contains(am.Id)).ToList();
+                //
+                //fonctionne en débug, pourquoi?????
+                modifiedSam.Arme = vm.IdArme != null ? db.Armes.FirstOrDefault(a => a.Id == vm.IdArme) : null;
 
                 db.Entry(modifiedSam).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View();
+            //
+            List<int> listeArmesId =
+                db.Samourais.Where(x => x.Arme != null && x.Id != vm.Samourai.Id).Select(x => x.Arme.Id).ToList();
+            vm.ArmeItems = db.Armes.Where(a => !listeArmesId.Contains(a.Id)).Select(a => new SelectListItem()
+                    {Text = a.Nom, Value = a.Id.ToString()})
+                .ToList();
+            //
+            vm.ArtMartialItems = db.ArtMartials.Select(am => new SelectListItem()
+                    {Text = am.Nom, Value = am.Id.ToString()})
+                .ToList();
+            //
+            if (vm.Samourai.Arme != null)
+            {
+                vm.IdArme = vm.Samourai.Arme.Id;
+            }
+            //
+            vm.IdsArtMartial = vm.Samourai.ArtMartials.Select(s => s.Id).ToList();
+
+            return View(vm);
         }
 
         // GET: Samourais/Delete/5
@@ -125,6 +178,7 @@ namespace TP01_Module06.Controllers
 
             SamouraisVM vm = new SamouraisVM();
             vm.Samourai = db.Samourais.Find(id);
+
             if (vm.Samourai == null)
             {
                 return HttpNotFound();
@@ -139,7 +193,15 @@ namespace TP01_Module06.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Samourai samourai = db.Samourais.Find(id);
+            foreach (var am in samourai.ArtMartials)
+            {
+                db.Entry(am).State = EntityState.Modified;
+            }
+
+            samourai.ArtMartials.Clear();
+
             db.Samourais.Remove(samourai);
+            db.Entry(samourai).State = EntityState.Deleted;
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -154,10 +216,16 @@ namespace TP01_Module06.Controllers
             base.Dispose(disposing);
         }
 
-        private SamouraisVM getArmes(SamouraisVM vm)
+        private SamouraisVM getArmesAndArtMartials(SamouraisVM vm)
         {
-            vm.Armes = db.Armes.Select(p => new SelectListItem()
-                    {Text = p.Nom, Value = p.Id.ToString()})
+            List<int> listeArmesId = db.Samourais.Where(s => s.Arme != null).Select(s => s.Arme.Id).ToList();
+
+            vm.ArmeItems = db.Armes.Where(a => !listeArmesId.Contains(a.Id)).Select(a => new SelectListItem()
+                    {Text = a.Nom, Value = a.Id.ToString()})
+                .ToList();
+
+            vm.ArtMartialItems = db.ArtMartials.Select(am => new SelectListItem()
+                    {Text = am.Nom, Value = am.Id.ToString()})
                 .ToList();
 
             return vm;

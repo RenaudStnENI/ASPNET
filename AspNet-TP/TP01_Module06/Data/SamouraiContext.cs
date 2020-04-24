@@ -1,10 +1,11 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+ using BO_Samourai;
 
-namespace TP01_Module06.Data
+ namespace TP01_Module06.Data
 {
     public class SamouraiContext : DbContext
     {
@@ -19,8 +20,20 @@ namespace TP01_Module06.Data
         {
         }
 
-        public System.Data.Entity.DbSet<BO_Samourai.Samourai> Samourais { get; set; }
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+
+            modelBuilder.Entity<Samourai>().Ignore(s => s.Potentiel);
+
+            modelBuilder.Entity<Samourai>().HasMany(s => s.ArtMartials).WithMany();
+
+            base.OnModelCreating(modelBuilder);
+        }
 
         public System.Data.Entity.DbSet<BO_Samourai.Arme> Armes { get; set; }
+        public System.Data.Entity.DbSet<BO_Samourai.Samourai> Samourais { get; set; }
+        public System.Data.Entity.DbSet<BO_Samourai.ArtMartial> ArtMartials { get; set; }
+
+
     }
 }

@@ -1,12 +1,22 @@
-namespace TP01_Module06.Migrations
+﻿namespace TP01_Module06.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class migration1 : DbMigration
+    public partial class initial : DbMigration
     {
         public override void Up()
         {
+            CreateTable(
+                "dbo.Armes",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Nom = c.String(),
+                        Degats = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
+            
             CreateTable(
                 "dbo.Samourais",
                 c => new
@@ -20,24 +30,14 @@ namespace TP01_Module06.Migrations
                 .ForeignKey("dbo.Armes", t => t.Arme_Id)
                 .Index(t => t.Arme_Id);
             
-            CreateTable(
-                "dbo.Armes",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Nom = c.String(),
-                        Degats = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id);
-            
         }
         
         public override void Down()
         {
             DropForeignKey("dbo.Samourais", "Arme_Id", "dbo.Armes");
             DropIndex("dbo.Samourais", new[] { "Arme_Id" });
-            DropTable("dbo.Armes");
             DropTable("dbo.Samourais");
+            DropTable("dbo.Armes");
         }
     }
 }

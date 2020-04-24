@@ -7,11 +7,9 @@ using Microsoft.Build.Framework;
 
 namespace BO_Samourai
 {
-    public class Arme : AbstractEntity
+    public class ArtMartial : AbstractEntity
     {
         [Required]
         public string Nom { get; set; }
-        [Required]
-        public int Degats { get; set; }
     }
 }

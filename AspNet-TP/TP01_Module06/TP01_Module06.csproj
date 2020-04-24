@@ -128,19 +128,20 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ArmesController.cs" />
+    <Compile Include="Controllers\ArtMartialsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SamouraisController.cs" />
     <Compile Include="Data\SamouraiContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202004211216534_migration1.cs" />
-    <Compile Include="Migrations\202004211216534_migration1.Designer.cs">
-      <DependentUpon>202004211216534_migration1.cs</DependentUpon>
+    <Compile Include="Migrations\202004232030561_initial.cs" />
+    <Compile Include="Migrations\202004232030561_initial.designer.cs">
+      <DependentUpon>202004232030561_initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202004211231453_migration2.cs" />
-    <Compile Include="Migrations\202004211231453_migration2.Designer.cs">
-      <DependentUpon>202004211231453_migration2.cs</DependentUpon>
+    <Compile Include="Migrations\202004232032568_artMartials.cs" />
+    <Compile Include="Migrations\202004232032568_artMartials.designer.cs">
+      <DependentUpon>202004232032568_artMartials.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\SamouraisVM.cs" />
@@ -194,6 +195,11 @@
     <Content Include="Views\Armes\Index.cshtml" />
     <Content Include="Views\Shared\_SamouraiPartial.cshtml" />
     <Content Include="Views\Shared\_SamouraiPartialWithId.cshtml" />
+    <Content Include="Views\ArtMartials\Create.cshtml" />
+    <Content Include="Views\ArtMartials\Delete.cshtml" />
+    <Content Include="Views\ArtMartials\Details.cshtml" />
+    <Content Include="Views\ArtMartials\Edit.cshtml" />
+    <Content Include="Views\ArtMartials\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -218,11 +224,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202004211216534_migration1.resx">
-      <DependentUpon>202004211216534_migration1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202004232030561_initial.resx">
+      <DependentUpon>202004232030561_initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202004211231453_migration2.resx">
-      <DependentUpon>202004211231453_migration2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202004232032568_artMartials.resx">
+      <DependentUpon>202004232032568_artMartials.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
