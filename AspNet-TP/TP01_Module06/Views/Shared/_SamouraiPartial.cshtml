@@ -40,7 +40,7 @@
         @if (Model.ArmeItems != null && Model.ArmeItems.Count > 0)
         {
             @Html.DropDownListFor(model => model.IdArme, Model.ArmeItems, "Aucun", new {htmlAttributes = new {@class = "form-control"}})
-            @Html.ValidationMessageFor(model => model.Samourai.Arme, "", new {@class = "text-danger"})
+            @Html.ValidationMessageFor(model => model.IdsArtMartial, "", new {@class = "text-danger"})
         }
         else
         {

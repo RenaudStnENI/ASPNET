@@ -127,7 +127,7 @@ namespace TP01_Module06.Controllers
         {
             if (ModelState.IsValid)
             {
-                Samourai modifiedSam = db.Samourais.Find(vm.Samourai.Id);
+                Samourai modifiedSam = db.Samourais.Include(x => x.Arme).FirstOrDefault(x => x.Id == vm.Samourai.Id);
                 //
                 modifiedSam.Nom = vm.Samourai.Nom;
                 //
@@ -137,10 +137,23 @@ namespace TP01_Module06.Controllers
                 {
                     db.Entry(am).State = EntityState.Modified;
                 }
+
                 modifiedSam.ArtMartials = db.ArtMartials.Where(am => vm.IdsArtMartial.Contains(am.Id)).ToList();
                 //
-                //fonctionne en débug, pourquoi?????
-                modifiedSam.Arme = vm.IdArme != null ? db.Armes.FirstOrDefault(a => a.Id == vm.IdArme) : null;
+
+                if (vm.IdArme != null)
+                {
+                    modifiedSam.Arme = db.Armes.FirstOrDefault(a => a.Id == vm.IdArme);
+                }
+                else
+                {
+                    var samouraisAvecMonArme = db.Samourais.FirstOrDefault(x => x.Arme.Id == vm.IdArme);
+                    samouraisAvecMonArme.Arme = null;
+                    db.Entry(samouraisAvecMonArme).State = EntityState.Modified;
+
+                    modifiedSam.Arme = null ?? db.Armes.FirstOrDefault(x => x.Id == vm.IdArme);
+                }
+
 
                 db.Entry(modifiedSam).State = EntityState.Modified;
                 db.SaveChanges();
@@ -162,6 +175,7 @@ namespace TP01_Module06.Controllers
             {
                 vm.IdArme = vm.Samourai.Arme.Id;
             }
+
             //
             vm.IdsArtMartial = vm.Samourai.ArtMartials.Select(s => s.Id).ToList();
 
